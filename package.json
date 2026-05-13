@@ -1,0 +1,18 @@
+{
+  "name": "youtube-clean-url",
+  "version": "1.0.0",
+  "description": "Copy clean YouTube URLs with Ctrl+Shift+Y.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf dist",
+    "copy": "cp -r public/* dist/",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run clean && tsc && npm run copy"
+  },
+  "devDependencies": {
+    "@types/chrome": "latest",
+    "rimraf": "latest",
+    "typescript": "latest"
+  }
+}
