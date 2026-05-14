@@ -1,20 +1,24 @@
 import { showBadge } from "./badge.js";
 import { copyToClipboardInTab } from "./clipboard.js";
-import { toCleanYouTubeUrl } from "./youtube.js";
+import { getCurrentVideoTime } from "./player.js";
+import { toCleanYouTubeUrl, toCleanYouTubeUrlWithTimestamp } from "./youtube.js";
 
 const COMMAND_COPY_CLEAN_URL = "copy-clean-youtube-url";
+const COMMAND_COPY_CLEAN_URL_WITH_TS = "copy-clean-youtube-url-with-timestamp";
 
 chrome.commands.onCommand.addListener((command) => {
   if (command === COMMAND_COPY_CLEAN_URL) {
-    void copyCleanUrlFromCurrentTab();
+    void copyCleanUrlFromCurrentTab(false);
+  } else if (command === COMMAND_COPY_CLEAN_URL_WITH_TS) {
+    void copyCleanUrlFromCurrentTab(true);
   }
 });
 
 chrome.action.onClicked.addListener(() => {
-  void copyCleanUrlFromCurrentTab();
+  void copyCleanUrlFromCurrentTab(false);
 });
 
-async function copyCleanUrlFromCurrentTab(): Promise<void> {
+async function copyCleanUrlFromCurrentTab(includeTimestamp: boolean): Promise<void> {
   try {
     const tab = await getCurrentTab();
 
@@ -23,7 +27,26 @@ async function copyCleanUrlFromCurrentTab(): Promise<void> {
       return;
     }
 
-    const cleanUrl = toCleanYouTubeUrl(tab.url);
+    let cleanUrl: string | null;
+
+    if (includeTimestamp) {
+      const currentTime = await getCurrentVideoTime(tab.id);
+
+      if (currentTime !== null) {
+        const baseUrl = toCleanYouTubeUrl(tab.url);
+
+        if (!baseUrl) {
+          await showBadge("NO");
+          return;
+        }
+
+        cleanUrl = `${baseUrl}?t=${currentTime}`;
+      } else {
+        cleanUrl = toCleanYouTubeUrlWithTimestamp(tab.url);
+      }
+    } else {
+      cleanUrl = toCleanYouTubeUrl(tab.url);
+    }
 
     if (!cleanUrl) {
       await showBadge("NO");
@@ -40,10 +63,10 @@ async function copyCleanUrlFromCurrentTab(): Promise<void> {
 }
 
 async function getCurrentTab(): Promise<chrome.tabs.Tab | undefined> {
-  const tabs = await chrome.tabs.query({
+  const [tab] = await chrome.tabs.query({
     active: true,
     currentWindow: true,
   });
 
-  return tabs[0];
+  return tab;
 }

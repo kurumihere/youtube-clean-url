@@ -1,22 +1,27 @@
 # YouTube Clean URL
 
-Tiny Chromium extension that copies clean YouTube URLs with `Ctrl + Shift + Y`.
+Tiny Chromium extension that copies clean YouTube URLs.
 
 ## What it does
 
-It converts messy YouTube links into clean short links.
+Converts messy YouTube links into clean short links, optionally with the current playback timestamp.
 
-### Input
+### Without timestamp (`Ctrl + Shift + Y` or click toolbar icon)
 
-```txt
-https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=abc&index=1
+```
+Input:  https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=abc&index=1
+Output: https://youtu.be/dQw4w9WgXcQ
 ```
 
-### Output
+### With current playback timestamp (`Ctrl + Shift + U`)
 
-```txt
-https://youtu.be/dQw4w9WgXcQ
 ```
+Input:  https://www.youtube.com/watch?v=dQw4w9WgXcQ
+Action: press shortcut at 1:30 into the video
+Output: https://youtu.be/dQw4w9WgXcQ?t=90
+```
+
+The timestamp is read directly from the video player — it's your actual playback position, not a URL parameter.
 
 ## Supported URLs
 
@@ -25,6 +30,7 @@ https://youtu.be/dQw4w9WgXcQ
 - `youtube.com/embed/VIDEO_ID`
 - `youtube.com/live/VIDEO_ID`
 - `youtu.be/VIDEO_ID`
+- `music.youtube.com/watch?v=VIDEO_ID`
 
 ## Requirements
 
@@ -51,17 +57,18 @@ npm run build
 3. Click **Load unpacked**
 4. Select the `dist` folder
 
-## Shortcut
+## Shortcuts
 
-Default shortcut:
+| Shortcut | Action |
+|---|---|
+| `Ctrl + Shift + Y` | Copy clean URL (without timestamp) |
+| `Ctrl + Shift + U` | Copy clean URL with current playback timestamp |
 
-```txt
-Ctrl + Shift + Y
+Click the toolbar icon to copy without timestamp.
+
+To change shortcuts, open:
+
 ```
-
-To change it, open:
-
-```txt
 chrome://extensions/shortcuts
 ```
 
@@ -75,7 +82,7 @@ npm run build
 
 Then reload the extension here:
 
-```txt
+```
 chrome://extensions
 ```
 

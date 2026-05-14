@@ -2,14 +2,13 @@
   "manifest_version": 3,
   "name": "YouTube Clean URL",
   "short_name": "YT Clean URL",
-  "description": "Copy clean YouTube URLs with Ctrl+Shift+Y.",
+  "description": "Copy clean YouTube URLs (Ctrl+Shift+Y).",
   "version": "1.0.0",
   "minimum_chrome_version": "102",
-  "permissions": ["tabs", "scripting"],
+  "permissions": ["tabs", "scripting", "clipboardWrite"],
   "host_permissions": [
-    "https://www.youtube.com/*",
     "https://youtube.com/*",
-    "https://m.youtube.com/*",
+    "https://*.youtube.com/*",
     "https://youtu.be/*"
   ],
   "background": {
@@ -25,6 +24,12 @@
         "default": "Ctrl+Shift+Y"
       },
       "description": "Copy clean YouTube URL"
+    },
+    "copy-clean-youtube-url-with-timestamp": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U"
+      },
+      "description": "Copy clean YouTube URL with timestamp"
     }
   }
 }
