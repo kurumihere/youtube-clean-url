@@ -1,27 +1,71 @@
+<p align="center">
+  <img src="assets/icon.svg" alt="YouTube Clean URL icon" width="96" height="96">
+</p>
+
 # YouTube Clean URL
 
-Tiny Chromium extension that copies clean YouTube URLs.
+Chrome and Firefox extension for copying clean YouTube links.
 
-## What it does
-
-Converts messy YouTube links into clean short links, optionally with the current playback timestamp.
-
-### Without timestamp (`Ctrl + Shift + Y` or click toolbar icon)
-
-```
-Input:  https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=abc&index=1
-Output: https://youtu.be/dQw4w9WgXcQ
+```text
+https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=abc&index=1
+-> https://youtu.be/dQw4w9WgXcQ
 ```
 
-### With current playback timestamp (`Ctrl + Shift + U`)
+With timestamp:
 
-```
-Input:  https://www.youtube.com/watch?v=dQw4w9WgXcQ
-Action: press shortcut at 1:30 into the video
-Output: https://youtu.be/dQw4w9WgXcQ?t=90
+```text
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+-> https://youtu.be/dQw4w9WgXcQ?t=90
 ```
 
-The timestamp is read directly from the video player — it's your actual playback position, not a URL parameter.
+The timestamp command reads the actual player time, not just the URL query.
+
+## Shortcuts
+
+| Browser | Clean URL | Clean URL with timestamp |
+|---|---:|---:|
+| Chrome/Chromium | `Ctrl + Shift + Y` | `Ctrl + Shift + U` |
+| Firefox | `Ctrl + Alt + Y` | `Ctrl + Alt + U` |
+
+The toolbar icon copies a clean URL without timestamp.
+
+## Install Locally
+
+```bash
+npm install
+npm run build
+```
+
+Chrome/Chromium:
+
+1. Open `chrome://extensions`
+2. Enable **Developer mode**
+3. Click **Load unpacked**
+4. Select `dist/chrome`
+
+Firefox 142+:
+
+1. Open `about:debugging#/runtime/this-firefox`
+2. Click **Load Temporary Add-on...**
+3. Select `dist/firefox/manifest.json`
+
+Shortcut settings:
+
+- Chrome/Chromium: `chrome://extensions/shortcuts`
+- Firefox: `about:addons` -> gear icon -> **Manage Extension Shortcuts**
+
+## Commands
+
+| Command | Purpose |
+|---|---|
+| `npm run build` | Build Chrome and Firefox extensions into `dist/` |
+| `npm run check` | Run TypeScript, URL parser tests, and Firefox lint |
+| `npm run package` | Create store-ready zip files in `packages/` |
+
+Package output:
+
+- `packages/youtube-clean-url-chrome-v1.0.0.zip`
+- `packages/youtube-clean-url-firefox-v1.0.0.zip`
 
 ## Supported URLs
 
@@ -31,60 +75,6 @@ The timestamp is read directly from the video player — it's your actual playba
 - `youtube.com/live/VIDEO_ID`
 - `youtu.be/VIDEO_ID`
 - `music.youtube.com/watch?v=VIDEO_ID`
-
-## Requirements
-
-- Node.js
-- npm
-- Chromium-based browser
-
-## Install dependencies
-
-```bash
-npm install
-```
-
-## Build
-
-```bash
-npm run build
-```
-
-## Install in Chromium
-
-1. Open `chrome://extensions`
-2. Enable **Developer mode**
-3. Click **Load unpacked**
-4. Select the `dist` folder
-
-## Shortcuts
-
-| Shortcut | Action |
-|---|---|
-| `Ctrl + Shift + Y` | Copy clean URL (without timestamp) |
-| `Ctrl + Shift + U` | Copy clean URL with current playback timestamp |
-
-Click the toolbar icon to copy without timestamp.
-
-To change shortcuts, open:
-
-```
-chrome://extensions/shortcuts
-```
-
-## Development
-
-After changing the code:
-
-```bash
-npm run build
-```
-
-Then reload the extension here:
-
-```
-chrome://extensions
-```
 
 ## License
 
