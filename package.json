@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit",
     "build:chrome": "rimraf dist/chrome && tsc --outDir dist/chrome && node scripts/prepare-dist.mjs chrome dist/chrome",
     "build:firefox": "rimraf dist/firefox && tsc --outDir dist/firefox && node scripts/prepare-dist.mjs firefox dist/firefox",
-    "build": "npm run clean && npm run build:chrome && npm run build:firefox"
+    "build": "npm run clean && npm run build:chrome && npm run build:firefox",
+    "test": "npm run build:chrome && node test/youtube.test.mjs"
   },
   "devDependencies": {
     "@types/chrome": "^0.1.42",
