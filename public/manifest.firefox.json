@@ -1,0 +1,27 @@
+{
+  "commands": {
+    "copy-clean-youtube-url": {
+      "suggested_key": {
+        "default": "Ctrl+Alt+Y"
+      }
+    },
+    "copy-clean-youtube-url-with-timestamp": {
+      "suggested_key": {
+        "default": "Ctrl+Alt+U"
+      }
+    }
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "type": "module"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "@youtube-clean-url",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}

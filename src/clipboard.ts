@@ -1,8 +1,10 @@
+import { extensionApi } from "./webextension.js";
+
 export async function copyToClipboardInTab(
   tabId: number,
   text: string,
 ): Promise<boolean> {
-  const [result] = await chrome.scripting.executeScript({
+  const [result] = await extensionApi.scripting.executeScript({
     target: { tabId },
     args: [text],
     func: async (value: string): Promise<boolean> => {

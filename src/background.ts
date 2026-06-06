@@ -1,12 +1,13 @@
 import { showBadge } from "./badge.js";
 import { copyToClipboardInTab } from "./clipboard.js";
+import { extensionApi } from "./webextension.js";
 import { getCurrentVideoTime } from "./player.js";
 import { toCleanYouTubeUrl, toCleanYouTubeUrlWithTimestamp } from "./youtube.js";
 
 const COMMAND_COPY_CLEAN_URL = "copy-clean-youtube-url";
 const COMMAND_COPY_CLEAN_URL_WITH_TS = "copy-clean-youtube-url-with-timestamp";
 
-chrome.commands.onCommand.addListener((command) => {
+extensionApi.commands.onCommand.addListener((command) => {
   if (command === COMMAND_COPY_CLEAN_URL) {
     void copyCleanUrlFromCurrentTab(false);
   } else if (command === COMMAND_COPY_CLEAN_URL_WITH_TS) {
@@ -14,7 +15,7 @@ chrome.commands.onCommand.addListener((command) => {
   }
 });
 
-chrome.action.onClicked.addListener(() => {
+extensionApi.action.onClicked.addListener(() => {
   void copyCleanUrlFromCurrentTab(false);
 });
 
@@ -63,7 +64,7 @@ async function copyCleanUrlFromCurrentTab(includeTimestamp: boolean): Promise<vo
 }
 
 async function getCurrentTab(): Promise<chrome.tabs.Tab | undefined> {
-  const [tab] = await chrome.tabs.query({
+  const [tab] = await extensionApi.tabs.query({
     active: true,
     currentWindow: true,
   });

@@ -2,19 +2,14 @@
   "manifest_version": 3,
   "name": "YouTube Clean URL",
   "short_name": "YT Clean URL",
-  "description": "Copy clean YouTube URLs (Ctrl+Shift+Y).",
+  "description": "Copy clean YouTube URLs.",
   "version": "1.0.0",
-  "minimum_chrome_version": "102",
   "permissions": ["tabs", "scripting", "clipboardWrite"],
   "host_permissions": [
     "https://youtube.com/*",
     "https://*.youtube.com/*",
     "https://youtu.be/*"
   ],
-  "background": {
-    "service_worker": "background.js",
-    "type": "module"
-  },
   "action": {
     "default_title": "Copy clean YouTube URL"
   },

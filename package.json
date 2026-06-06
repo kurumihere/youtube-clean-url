@@ -1,14 +1,15 @@
 {
   "name": "youtube-clean-url",
   "version": "1.0.0",
-  "description": "Copy clean YouTube URLs (Ctrl+Shift+Y).",
+  "description": "Copy clean YouTube URLs.",
   "private": true,
   "type": "module",
   "scripts": {
     "clean": "rimraf dist",
-    "copy": "cp -r public/* dist/",
     "typecheck": "tsc --noEmit",
-    "build": "npm run clean && tsc && npm run copy"
+    "build:chrome": "rimraf dist/chrome && tsc --outDir dist/chrome && node scripts/prepare-dist.mjs chrome dist/chrome",
+    "build:firefox": "rimraf dist/firefox && tsc --outDir dist/firefox && node scripts/prepare-dist.mjs firefox dist/firefox",
+    "build": "npm run clean && npm run build:chrome && npm run build:firefox"
   },
   "devDependencies": {
     "@types/chrome": "^0.1.42",

@@ -1,6 +1,8 @@
+import { extensionApi } from "./webextension.js";
+
 export async function getCurrentVideoTime(tabId: number): Promise<number | null> {
   try {
-    const [result] = await chrome.scripting.executeScript({
+    const [result] = await extensionApi.scripting.executeScript({
       target: { tabId },
       func: (): number | null => {
         const video = document.querySelector("video");
