@@ -41,7 +41,7 @@ Firefox 142+:
 1. Open `about:debugging#/runtime/this-firefox`
 2. Click **Load Temporary Add-on...**
 3. Select `dist/firefox/manifest.json`
-> Or just install [*this*](https://addons.mozilla.org/en-US/firefox/addon/youtube-clean-url/)
+> *Or just install [this](https://addons.mozilla.org/en-US/firefox/addon/youtube-clean-url/)*
 
 Shortcut settings:
 
